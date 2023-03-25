@@ -1,0 +1,31 @@
+/* center the content in the body */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* style the main heading */
+  h1 {
+    font-size: 2rem;
+  }
+  
+  /* style the form inputs and button */
+  form input, form button {
+    padding: .5rem;
+    margin-right: .5rem;
+  }
+  
+  form button {
+    background-color: #4CAF50; /* green color */
+    border-radius: .3rem;
+    color:white
+  }
+  
+  /* style the results container */
+  #results {
+   border-radius:.3rem ;
+   box-shadow:.02em .02em rgba(0,0,0,.25)
+  }
+
+  

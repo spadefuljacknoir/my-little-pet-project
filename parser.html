@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub User Data</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <h1>GitHub User Data</h1>
+
+    <!-- create form for user input -->
+    <form id="github-form">
+      Enter GitHub username:
+      <input type="text" id="username-input" required />
+      <button type="submit">Get user data</button>
+    </form>
+
+     <!-- display results from API call here -->
+     <div id='results'></div>
+
+
+   <!-- import axios library and main script file -->
+   <!-- make sure the path to your local files is correct! -->
+  	<script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+  	<script src='./parser.js' ></script>
+  </body>
+
+</html>

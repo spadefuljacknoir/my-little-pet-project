@@ -1,0 +1,96 @@
+// JS PARSER;
+
+const axios = require("axios"); // import axios library
+
+// function to fetch data from API endpoint
+async function getUserData(username) {
+  const apiUrl = `https://api.github.com/users/${username}`;
+  
+  try {
+    const response = await axios.get(apiUrl);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// usage example:
+getUserData('spadeful').then(data => {
+  console.log(`Username: ${data.login}`);
+  console.log(`Name: ${data.name}`);
+  console.log(`Bio: ${data.bio || 'No bio available.'}`);
+  console.log(`Number of Followers: ${data.followers}`);
+});
+
+// HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub User Search</title>
+</head>
+<body>
+
+  <h1>GitHub User Search</h1>
+
+  <label for="username-input">Enter a GitHub username to search:</label>
+  <input type="text" id="username-input" />
+  
+  <button onclick="searchUser()">Search</button>
+
+  <!-- Results display area -->
+  <divoutput"></div>
+
+
+<!-- Include our JavaScript file with the API data fetching code -->
+<script src="./parser.js"></script>
+
+<script>
+// Function to handle searching of a GitHub user
+async function searchUser() {
+  
+    // Get the value from input field
+    const username = document.getElementById("username-input").value.toLowerCase();
+    
+    // Make a request and parse returned data on success 
+    const userData = await getUserData(username);
+
+    try {    
+        const outputArea = document.querySelector("#output");
+
+        // Clear any previous results
+        outputArea.innerHTML = '';
+
+        // Create new elements for each piece of fetched data
+      const usernameHeader = document.createElement('h2');
+      usernameHeader.innerText=`${userData.login}`;
+      outputArea.appendChild(usernameHeader);
+      
+      if (userData.name) {
+          const nameLabel= document.createElement('p');
+          nameLabel.innerText=`Name: ${userData.name}`
+          outputArea.appendChild(nameLabel);        
+      }
+
+       if (userData.bio) {
+            const bioDiv=document.createElement('p');
+            bioDiv.innerText=`Bio: ${userData.bio}`
+            outputArea.appendChild(bioDiv);       
+       }
+        
+       if (parseInt(userData.followers)>0){
+           const followerCount=document.createElement('p')
+           followerCount.innerText=`Followers: ${userData.followers}`;
+           outputArea.appendChild(followerCount);
+       }
+
+    }
+    catch (error) {
+      console.error(error); // Log any errors to the console
+    }
+}
+</script>
+
+</body>
+</html>
